@@ -4,3 +4,8 @@ export interface Chat {
     message: string,
     created_at: string
 }
+
+export interface NewChat {
+  name: string;
+  message: string;
+}

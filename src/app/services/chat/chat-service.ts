@@ -1,7 +1,7 @@
 import { Service } from '@angular/core';
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Chat } from '../../interfaces/chat/chat';
+import { Chat, NewChat } from '../../interfaces/chat/chat';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class ChatService {
         return this.http.get<Chat[]>(this.apiUrl);
     }
 
-    sendChat(chat: Chat) {
+    sendChat(chat: NewChat) {
         return this.http.post<Chat>(this.apiUrl, chat);
     }
 
