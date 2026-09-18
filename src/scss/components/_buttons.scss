@@ -1,0 +1,195 @@
+@use '../abstract/' as *;
+
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background-color: $blue-color;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 125ms ease-in-out;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 21px;
+
+  @include small-mobile {
+    padding: 8px 10px;
+  }
+
+  @include landscape {
+    padding: 8px 10px;
+  }
+
+
+  &:hover {
+    background-color: $ligth-blue-color;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+
+  }
+
+  &:active {
+    background-color: $dark-blue-color;
+  }
+
+  &--list {
+    width: 70%;
+  }
+
+  &--create {
+    gap: 10px;
+
+    &::after {
+      content: "";
+      width: 24px;
+      height: 24px;
+
+      background: url("/assets/img/components/general/check.svg") center / contain no-repeat;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+  }
+
+  &--border {
+    &::after {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: url("/assets/img/forms/cancel.svg") center / contain no-repeat;
+    }
+
+    &:hover::after {
+      background: url("/assets/img/forms/cancel-hover.svg") center / contain no-repeat;
+    }
+  }
+
+  &--signup {
+    font-size: 16px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $light-blue-button;
+    }
+  }
+
+  &--login {
+    font-size: 21px;
+    font-weight: bold;
+
+    @include small-mobile {
+      font-size: 16px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: $light-blue-button;
+    }
+  }
+
+}
+
+.btn-primary.btn-primary--hide {
+  @include mobile {
+    display: none;
+  }
+
+  @include landscape {
+    display: none;
+  }
+}
+
+
+.btn-primary.btn-primary--mobil {
+
+  @include small-mobile {
+    font-size: 18px;
+  }
+
+  @include mobile-tablet {
+    font-size: 18px;
+  }
+
+  @include landscape {
+    font-size: 18px;
+  }
+}
+
+
+.btn-primary.btn-primary--border {
+  background-color: $white;
+  font-size: 21px;
+  color: $blue-color;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  gap: 8px;
+  border: 1px solid $blue-color;
+  box-shadow: none;
+
+  @include small-mobile {
+    font-size: 18px;
+  }
+
+  @include landscape {
+    font-size: 18px;
+  }
+
+  &:hover {
+    border-color: $light-blue-button;
+    outline: 1px solid $light-blue-button;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  }
+}
+
+.btn-primary.btn-primary--create {
+  gap: 8px;
+
+  @include desktop-s {
+    letter-spacing: -7%;
+  }
+
+  &:hover {
+    background-color: $light-blue-button;
+  }
+
+}
+
+.btn-primary.btn-primary--guest {
+  background-color: $white;
+  font-size: 21px;
+  color: $blue-color;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  gap: 8px;
+  border: 1px solid $blue-color;
+  box-shadow: none;
+
+  @include mobile {
+    font-size: 16px;
+  }
+
+    @include tablet {
+    font-size: 18px;
+  }
+
+  @include landscape {
+    font-size: 18px;
+  }
+
+  &:hover {
+    border-color: $light-blue-button;
+    outline: 1px solid $light-blue-button;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  }
+}

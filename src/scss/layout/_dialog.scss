@@ -1,0 +1,1281 @@
+@use '../abstract/' as *;
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.user-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1212px;
+    background: $white;
+    border: none;
+    border-radius: 30px;
+    transform: translate(-50%, -50%);
+    animation: dialogIn .3s ease;
+    display: flex;
+    flex-direction: column;
+
+    @include mobile-tablet {
+        animation: dialogInMobile 250ms ease-out forwards;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    @include mobile {
+        width: 100dvw;
+    }
+
+    @include small-mobile {
+        width: 100dvw;
+        animation: dialogInMobile 250ms ease-out forwards;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        max-width: 95%;
+    }
+
+    @include tablet {
+        width: 100dvw;
+    }
+
+    @include landscape {
+        width: 100dvw;
+        animation: dialogInMobile 250ms ease-out forwards;
+        height: 100dvh;
+        position: fixed;
+
+    }
+
+    @include small-mobile-high {
+        flex-direction: column;
+    }
+
+    &--task {
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        max-height: calc(100dvh - 50px);
+
+        @include widesscreen {
+            max-height: calc(75dvh - 80px);
+        }
+    }
+
+    &--task-view {
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        width: 540px;
+
+        @include widesscreen {
+            width: 820px;
+        }
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
+        }
+    }
+
+    &--task-view-edit {
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        width: 540px;
+
+        @include widesscreen {
+            width: 820px;
+        }
+
+        @include small-mobile-high {
+            flex-direction: column;
+        }
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
+        }
+
+    }
+
+    &--contact {
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+
+        @include desktop-min {
+            height: 592px;
+        }
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
+        }
+    }
+}
+
+.form-scroll {
+    overflow-y: auto;
+
+    @include mobile {
+        max-height: calc(100dvh - 250px);
+    }
+
+    @include landscape {
+        margin-top: 30px;
+        max-height: calc(100dvh - 160px);
+    }
+
+    &--task {
+        justify-content: space-between;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+
+        @include mobile {
+            flex-direction: column;
+        }
+
+        @include tablet {
+            flex-direction: column;
+            max-height: calc(100dvh - 310px);
+
+        }
+
+        @include small-mobile {
+            flex-direction: column;
+        }
+
+        @include widesscreen {
+            flex: unset;
+        }
+
+        @include landscape {
+            margin-top: 10px;
+            max-height: calc(100dvh - 170px);
+
+        }
+
+    }
+
+    &--task-dialog {
+        @include mobile {
+            flex-direction: column;
+            max-height: calc(100dvh - 330px);
+
+        }
+
+        @include tablet {
+            flex-direction: column;
+            max-height: calc(100dvh - 405px);
+
+        }
+
+        @include small-mobile {
+            flex-direction: column;
+            max-height: calc(100dvh - 315px);
+        }
+
+
+        @include landscape {
+            max-height: calc(100dvh - 270px);
+        }
+
+    }
+
+    &--edit {
+        display: flex;
+        flex-direction: column;
+        margin: 40px 0 30px;
+        flex: 1;
+        min-height: 0;
+
+        @include mobile {
+            flex-direction: column;
+            margin: 50px 0 30px;
+
+        }
+
+        @include tablet {
+            flex-direction: column;
+            margin: 50px 0 30px;
+            max-height: calc(100dvh - 300px);
+        }
+
+        @include small-mobile {
+            flex-direction: column;
+            max-height: calc(100dvh - 200px);
+            margin: 40px 0 10px;
+        }
+
+        @include widesscreen {
+            max-height: calc(100dvh - 200px);
+            flex: 1;
+        }
+
+        @include landscape {
+            max-height: calc(100dvh - 140px);
+        }
+
+        @include desktop-md {
+            max-height: calc(100dvh - 300px);
+
+        }
+
+        @include desktop-hd {
+            max-height: calc(100dvh - 290px);
+
+        }
+
+        @include desktop-s {
+            max-height: calc(100dvh - 300px);
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $dark-grey-color;
+        border-radius: 6px;
+        border: 4px solid $white;
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: darken($dark-grey-color, 10%);
+    }
+
+
+}
+
+.user-dialog--task>app-add-task,
+.user-dialog--task-view-edit>app-add-task,
+.user-dialog--task-view>app-task-view-dialog {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+
+.user-dialog.closing {
+
+    animation: dialogOut .3s ease forwards;
+
+    @include mobile-tablet {
+        animation: dialogOutMobile 250ms ease-out forwards;
+    }
+
+
+}
+
+@keyframes dialogIn {
+
+    from {
+        transform: translate(calc(-50% + 100vw), -50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+}
+
+@keyframes dialogOut {
+
+    from {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(calc(-50% + 100vw), -50%);
+        opacity: 0;
+    }
+
+}
+
+@keyframes dialogInMobile {
+    from {
+        transform: translate(-50%, calc(-50% + 100vh));
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+}
+
+@include mobile {
+    @keyframes dialogInMobile {
+        from {
+            transform: translate(-50%, calc(-50% + 100vh));
+            opacity: 0;
+        }
+
+        to {
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+    }
+}
+
+@include landscape {
+    @keyframes dialogInMobile {
+        from {
+            transform: translate(-50%, calc(-50% + 100vh));
+            opacity: 0;
+        }
+
+        to {
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes dialogOutMobile {
+    from {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(-50%, calc(-50% + 100vh));
+        opacity: 0;
+    }
+}
+
+@include small-mobile {
+    @keyframes dialogOutMobile {
+        from {
+            transform: translate(-50%, 0%);
+            opacity: 1;
+        }
+
+        to {
+            transform: translate(-50%, calc(-50% + 100vh));
+            opacity: 0;
+        }
+    }
+}
+
+.dialog-content {
+    width: 100%;
+    height: 100%;
+
+    &--task {
+        padding: 55px 74px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+
+        @include mobile {
+            padding: 14px 12px;
+        }
+
+        @include tablet {
+            padding: 48px 74px;
+        }
+
+        @include landscape {
+            padding: 14px 12px;
+        }
+    }
+
+}
+
+.dialog-wrapper-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+    @include mobile-tablet {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        justify-content: stretch;
+
+    }
+
+    @include small-mobile {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        justify-content: stretch;
+    }
+
+    @include landscape {
+        flex: 1;
+        min-height: 0;
+    }
+
+    &--task {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        align-items: stretch;
+
+        @include desktop-s {
+            align-items: center;
+        }
+
+        @include desktop-md {
+            align-items: center;
+        }
+
+        @include desktop-hd {
+            align-items: center;
+        }
+
+        @include landscape {
+            align-items: flex-start;
+
+        }
+    }
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.flex-dialog-close {
+    display: flex;
+    justify-content: flex-end;
+
+    @include mobile-tablet {
+        padding-bottom: 20px;
+    }
+
+    @include small-mobile {
+        padding-bottom: 10px;
+
+    }
+
+    @include landscape {
+        position: fixed;
+        top: 0;
+        right: 20px;
+    }
+}
+
+.dialog-user-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 1001;
+
+
+
+    @include tablet {
+        top: 40px;
+        right: 24px;
+    }
+
+    @include mobile {
+        top: 40px;
+        right: 24px;
+    }
+
+    @include landscape {
+        top: 28px;
+        right: 20px;
+    }
+
+
+    @include small-mobile {
+        top: 40px;
+        right: 20px;
+    }
+
+    &--task {
+        top: 74px;
+        right: 60px;
+
+        @include mobile {
+            top: 24px;
+            right: 16px;
+        }
+
+        @include tablet {
+            top: 64px;
+            right: 64px;
+        }
+
+        @include landscape {
+            top: 28px;
+            right: 20px;
+        }
+
+        @include small-mobile {
+            top: 24px;
+            right: 8px;
+        }
+    }
+}
+
+.dialog-close-btn {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background: url('/assets/img/components/general/close.svg') center no-repeat;
+    border: 0;
+
+
+
+    @include mobile-tablet {
+        width: 32px;
+        height: 32px;
+        background: url('/assets/img/components/general/dialog-close-mobil.svg') center no-repeat;
+        position: relative;
+        z-index: 9999;
+        pointer-events: auto;
+
+        &--edit {
+            background: url('/assets/img/components/general/close.svg') center no-repeat;
+        }
+    }
+
+}
+
+.dialog-close-btn:hover {
+    background: url('/assets/img/components/general/close-hover.svg') center no-repeat;
+}
+
+.dialog-left {
+    background-color: $blue-color;
+    height: 100%;
+    width: 453px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    @include mobile {
+        padding: 16px;
+        width: 100%;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        align-items: flex-start;
+        height: 280px;
+        position: relative;
+        // margin-bottom: 40px;
+    }
+
+
+    @include tablet {
+        padding: 16px;
+        width: 100%;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        align-items: flex-start;
+        height: 280px;
+        position: relative;
+        // margin-bottom: 40px;
+    }
+
+    @include small-mobile {
+        height: 180px;
+        width: 100%;
+        // margin-bottom: 20px;
+    }
+
+    @include desktop-md {
+        padding-right: 0px;
+    }
+
+    @include landscape {
+        height: 100px;
+        position: fixed;
+        top: 0;
+    }
+
+
+    &--task {
+        background-color: $white;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        justify-content: flex-start;
+        width: unset;
+
+        @include mobile-tablet {
+            height: 100%;
+            padding: 0;
+        }
+
+        @include desktop-s {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+
+        @include landscape {
+            height: 100%;
+            position: unset;
+            padding: 0;
+        }
+
+        @include widesscreen {
+            width: 100%;
+        }
+
+        @include small-mobile {
+            height: 100%;
+            padding: 0;
+        }
+
+    }
+}
+
+.dialog-right {
+
+    display: flex;
+
+    @include mobile-tablet {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        align-items: center;
+        justify-content: center;
+    }
+
+    @include landscape {
+        flex: 1;
+        min-height: 0;
+    }
+
+
+    &--task {
+        flex-direction: column;
+
+        @include desktop-s {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        @include landscape {
+            width: 100%;
+        }
+
+        @include small-mobile {
+            // margin-top: 25px;
+        }
+
+        @include widesscreen {
+            width: 100%;
+        }
+
+    }
+
+    &--contact {
+        @include desktop-s {
+            width: 60%;
+        }
+
+        @include widesscreen {
+            width: 60%;
+        }
+
+
+        @include mobile-tablet {
+            margin-top: 40px;
+        }
+
+        @include small-mobile {
+            margin-top: 25px;
+        }
+
+        @include landscape {
+            margin-top: 0px;
+        }
+    }
+}
+
+
+.dialog-right-inner-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding: 32px;
+
+    @include mobile {
+        padding: 32px 8px 32px 8px;
+    }
+
+    @include tablet {
+        padding: 50px 8px 32px 8px;
+    }
+
+}
+
+.right-user-form {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 48px;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    @include mobile-tablet {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    @include desktop-s {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+.dialog-logo {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+
+    @include mobile-tablet {
+        display: none;
+    }
+}
+
+.dialog-logo-img {
+    height: 67px;
+    width: auto;
+}
+
+.dialog-headline {
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 61px;
+    color: $white;
+    word-break: break-word;
+
+
+    @include tablet {
+        font-size: 47px;
+    }
+
+    @include mobile {
+        font-size: 36px;
+    }
+
+    @include small-mobile {
+        font-size: 30px;
+        padding-right: 6px;
+    }
+
+    @include landscape {
+        font-size: 30px;
+    }
+
+
+    &--task {
+        color: $black;
+        padding-bottom: 20px;
+
+        @include tablet {
+            font-size: 47px;
+            padding-top: 0px;
+            padding-bottom: 20px;
+        }
+
+        @include mobile {
+            font-size: 36px;
+            padding-top: 0px;
+            padding-bottom: 20px;
+        }
+
+        @include landscape {
+            font-size: 24px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        @include small-mobile {
+            font-size: 32px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+    }
+
+    &--task-view {
+        color: $black;
+        padding-bottom: 20px;
+    }
+
+
+}
+
+.dialog-subline {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    color: $white;
+    font-size: 27px;
+
+    @include mobile-tablet {
+        font-size: 20px;
+    }
+
+    @include small-mobile {
+        font-size: 16px;
+    }
+
+    @include landscape {
+        font-size: 16px;
+    }
+}
+
+.dialog-headline-stroke {
+    padding-top: 16px;
+    border-bottom: 3px solid $ligth-blue-color;
+    width: 90px;
+}
+
+.dialog-form {
+    justify-self: end;
+
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+
+    @include mobile-tablet {
+        justify-self: unset;
+    }
+
+    @include small-mobile {
+        padding-top: 10px;
+    }
+
+    @include landscape {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        padding-top: 20px;
+    }
+
+
+    &--task {
+        display: flex;
+        justify-self: unset;
+        justify-content: space-between;
+
+        @include small-mobile {
+            padding-top: 10px;
+        }
+
+        @include landscape {
+            padding-top: 0px;
+            width: calc(100dvw - 16px);
+        }
+    }
+}
+
+.dialog-form form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.dialog-form--task form {
+    @include small-mobile {
+        width: 100%;
+    }
+
+    @include landscape {
+        width: 100%;
+    }
+
+}
+
+.dialog-user-close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+
+.dialog-user-logo {
+    display: flex;
+    align-items: center;
+
+    @include mobile {
+        position: absolute;
+        top: 280px;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+
+    @include tablet {
+        position: absolute;
+        top: 280px;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+
+    @include small-mobile {
+        position: absolute;
+        top: 180px;
+        left: 50%;
+
+    }
+
+    @include landscape {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+    }
+}
+
+.dialog-user-logo .contact-details__avatar {
+
+    @include mobile {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+    }
+
+    @include tablet {
+        width: 100px;
+        height: 100px;
+        font-size: 42px;
+    }
+
+    @include small-mobile {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+    }
+
+    @include landscape {
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
+    }
+}
+
+.dialog-user-logo img {
+    width: 120px;
+    height: auto;
+
+    @include mobile {
+        width: 100px;
+    }
+
+    @include small-mobile {
+        width: 80px;
+
+    }
+
+    @include landscape {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.form-cell {
+    padding-bottom: 12px;
+    width: 100%;
+
+    @include small-mobile {
+        padding-bottom: 8px;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+
+    &--task {
+        @include small-mobile {
+            width: 100%;
+        }
+
+        @include mobile-tablet {
+            width: 100%;
+        }
+
+        @include landscape {
+            width: 100%;
+        }
+    }
+}
+
+.form-cell:first-child {
+    @include landscape {
+        margin-top: 20px;
+    }
+
+    &--task {
+        @include landscape {
+            margin-top: 0px;
+        }
+    }
+}
+
+.form-cell input {
+    width: 422px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid $grey-form-color;
+    padding: 13px 40px 13px 21px;
+    font-size: 20px;
+
+    @include mobile-tablet {
+        width: 100%;
+        height: 41px;
+
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include small-mobile {
+        height: 36px;
+        padding: 13px 40px 13px 11px;
+
+    }
+
+    @include widesscreen {
+        width: 100%;
+
+    }
+
+    &:focus {
+        border-color: $grey-form-blue;
+        outline: none;
+    }
+}
+
+.user-dialog--task-view-edit .form-cell input {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+.user-dialog--task-view-edit .form-cell textarea {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+
+.form-cell--subtask input {
+    padding: 13px 80px 13px 21px;
+    width: 100%;
+}
+
+.form-cell--task input {
+
+    @include mobile {
+        font-size: 16px;
+    }
+
+    @include small-mobile {
+        font-size: 16px;
+
+    }
+
+    @include landscape {
+        font-size: 16px;
+
+    }
+}
+
+.form-cell input::placeholder {
+    color: $grey-form-color;
+    font-size: 20px;
+}
+
+.form-cell--task input::placeholder {
+    @include mobile {
+        font-size: 16px;
+    }
+
+    @include small-mobile {
+        font-size: 16px;
+    }
+
+    @include landscape {
+        font-size: 16px;
+    }
+}
+
+.form-cell date::placeholder {
+    color: $grey-form-color;
+    font-size: 20px;
+}
+
+.form-cell--task date::placeholder {
+    @include mobile {
+        font-size: 16px;
+    }
+
+    @include small-mobile {
+        font-size: 16px;
+    }
+}
+
+
+
+input.ng-invalid.ng-dirty,
+input.ng-invalid.ng-touched {
+    border-color: $red-form-color;
+}
+
+.input-name {
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/forms/person.svg') 95% no-repeat;
+    object-fit: contain;
+    padding-right: 21px;
+}
+
+.input-mail {
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/forms/mail.svg') 95% no-repeat;
+    object-fit: contain;
+    padding-right: 21px;
+}
+
+.input-phone {
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/forms/call.svg') 95% no-repeat;
+    object-fit: contain;
+    padding-right: 21px;
+}
+
+
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-top: 20px;
+    flex-shrink: 0;
+
+    @include mobile {
+        padding-top: 0px;
+        justify-content: center;
+
+    }
+
+    @include tablet {
+        justify-content: center;
+
+    }
+
+    @include landscape {
+        position: fixed;
+        bottom: 10px;
+        width: 95%;
+        gap: 20px;
+    }
+
+    &--task {
+        padding-top: 20px;
+
+        @include landscape {
+            position: fixed;
+            width: 100%;
+            gap: 20px;
+            right: 0;
+            bottom: 5px;
+        }
+    }
+
+    &--task-mobile {
+        @include landscape {
+            bottom: 85px;
+        }
+    }
+
+
+}
+
+.form-error-placeholder {
+    height: 15px;
+    display: flex;
+}
+
+.form-error {
+    color: $red-form-color;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 400;
+    padding-top: 5px;
+
+    @include mobile {
+        font-size: 16px;
+    }
+
+    @include small-mobile {
+        font-size: 14px;
+    }
+
+    &__policy {
+        color: $red-form-color;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+    }
+}
+
+.form-message {
+    margin-top: 26px;
+    font-weight: 600;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+
+    &.error {
+        color: #e74c3c;
+    }
+}
+
+.assign-wrapper {
+    width: 100%;
+}

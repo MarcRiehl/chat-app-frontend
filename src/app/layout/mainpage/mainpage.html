@@ -1,18 +1,19 @@
-<div class="chat-wrapper">
+<app-header></app-header>
+<main>
+<div class="wrapper-chat">
     @for (chat of chats(); track chat.id) {
-    <div>
-        <strong>{{ chat.name }}</strong>
-
-        <p>{{ chat.message }}</p>
-
-        <small>
-            {{ chat.created_at | date:'dd.MM.yyyy HH:mm' }}
-        </small>
+    <div class="chat-message">
+        <div class="form-cell"><h3 class="chat-name">{{ chat.name }}</h3></div>
+        <div class="chat-message">{{ chat.message }}</div>
+        <div class="chat-date">{{ chat.created_at | date:'dd.MM.yyyy HH:mm' }}</div>
+            
+       
     </div>
     }
 </div>
-<div class="form-wrapper">
+<div class="wrapper-form">
     <form [formGroup]="sendChatForm" (ngSubmit)="onSubmit()">
+                <div class="form-cell">
         <div class="form-cell-label">
             <label for="name">Name:</label>
         </div>
@@ -35,6 +36,7 @@
             }
             }
         </div>
+        </div>
         <div class="form-cell">
             <div class="form-cell-label">
                 <label for="message">Message:</label>
@@ -52,8 +54,9 @@
             </div>
         </div>
         <div class="form-submit">
-            <button class="button__default" type="submit" [disabled]="sendChatForm.invalid">Senden
+            <button class="btn-primary" type="submit" [disabled]="sendChatForm.invalid">Senden
             </button>
         </div>
     </form>
 </div>
+</main>
