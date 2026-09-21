@@ -21,7 +21,7 @@ export class Mainpage implements OnInit {
       next: (data) => {
         this.chats.set(data);
 
-        console.log('Anzahl:', this.chats().length);
+        // console.log('Anzahl:', this.chats().length);
       },
       error: (error) => {
         console.error(error);
@@ -65,7 +65,7 @@ export class Mainpage implements OnInit {
 
       this.chatService.sendChat(chat).subscribe({
         next: (chat) => {
-          console.log('Chat gespeichert:', chat);
+          // console.log('Chat gespeichert:', chat);
           this.sendChatForm.reset();
           this.loadChats();
         },
